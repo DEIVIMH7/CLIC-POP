@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIC POP - Protege tu vida</title>
+    <style>
+        body {
+            background-color: orange;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            border: 5px solid yellow;
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: yellow;
+            padding: 10px;
+        }
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .column {
+            float: left;
+            width: 25%;
+            padding: 15px;
+        }
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        #chatbot {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 300px;
+            height: 400px;
+            background-color: white;
+            border: 1px solid black;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+            flex-direction: column;
+        }
+        #chatbot-header {
+            background-color: yellow;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        #chatbot-messages {
+            flex-grow: 1;
+            padding: 10px;
+            overflow-y: auto;
+        }
+        #chatbot-input {
+            display: flex;
+        }
+        #chatbot-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        #chatbot-input button {
+            padding: 10px;
+            background-color: yellow;
+            border: none;
+            cursor: pointer;
+        }
+        #chatbot-button {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: yellow;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="navbar">
+        <a href="#quienes-somos">Quienes Somos</a>
+        <a href="#productos">Productos</a>
+        <a href="#calidad">Calidad</a>
+        <a href="#atencion-tecnica">Atención Técnica</a>
+    </div>
+
+    <div class="row">
+        <div class="column" id="quienes-somos">
+            <h2>Quienes Somos</h2>
+            <p>Información sobre quiénes somos.</p>
+        </div>
+        <div class="column" id="productos">
+            <h2>Productos</h2>
+            <p>Información sobre nuestros productos.</p>
+        </div>
+        <div class="column" id="calidad">
+            <h2>Calidad</h2>
+            <p>Información sobre nuestra calidad.</p>
+        </div>
+        <div class="column" id="atencion-tecnica">
+            <h2>Atención Técnica</h2>
+            <p>Información sobre nuestra atención técnica.</p>
+        </div>
+    </div>
+</div>
+
+<div id="chatbot">
+    <div id="chatbot-header">Chatbot - Call Center</div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-input">
+        <input type="text" id="chatbot-message" placeholder="Escribe tu mensaje...">
+        <button onclick="sendMessage()">Enviar</button>
+    </div>
+</div>
+
+<button id="chatbot-button" onclick="toggleChatbot()">Chatbot</button>
+
+<script>
+    function toggleChatbot() {
+        var chatbot = document.getElementById('chatbot');
+        if (chatbot.style.display === 'none' || chatbot.style.display === '') {
+            chatbot.style.display = 'flex';
+        } else {
+            chatbot.style.display = 'none';
+        }
+    }
+
+    function sendMessage() {
+        var messageInput = document.getElementById('chatbot-message');
+        var message = messageInput.value;
+        if (message) {
+            var messagesContainer = document.getElementById('chatbot-messages');
+            var messageElement = document.createElement('div');
+            messageElement.textContent = 'Tú: ' + message;
+            messagesContainer.appendChild(messageElement);
+            messageInput.value = '';
+
+            // Respuesta simulada del chatbot
+            setTimeout(function() {
+                var botMessageElement = document.createElement('div');
+                botMessageElement.textContent = 'Bot: Gracias por tu mensaje. Pronto te responderemos.';
+                messagesContainer.appendChild(botMessageElement);
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1000);
+        }
+    }
+</script>
+
+</body>
+</html>
